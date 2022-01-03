@@ -34,5 +34,10 @@
 # vscode editor
 .vscode/
 
+# msvc debug files
+*.pdb
+*.ilk
+
 # playgroud
 playgroud.cpp
+playgroud.c
