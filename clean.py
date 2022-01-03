@@ -13,10 +13,6 @@ import sys
 
 # tmpfileSuffixs 临时文件后缀类型
 tmpfileSuffixs = [".exe", ".obj", ".pdb", ".ilk", "a.out"]
-# excludeDirs 不需要清理的目录
-excludeDirs = [".git", ".vscode"]
-
-
 def isTmpFile(filename):
     for suffix in tmpfileSuffixs:
         if filename.endswith(suffix):
@@ -24,6 +20,8 @@ def isTmpFile(filename):
     return False
 
 
+# excludeDirs 不需要清理的目录
+excludeDirs = [".git", ".vscode"]
 def isExcludeDir(dir):
     for ex in excludeDirs:
         if ex in dir:
