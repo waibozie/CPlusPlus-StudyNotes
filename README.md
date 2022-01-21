@@ -12,7 +12,7 @@
 | 第二章: 开始学习 C++         | 学习完成 | [chapter02](./c++primerplus/chapter02/) |
 | 第三章: 处理数据             | 学习完成 | [chapter03](./c++primerplus/chapter03/) |
 | 第四章: 复合类型             | 学习完成 | [chapter04](./c++primerplus/chapter04/) |
-| 第五章: 循环与关系表达式     | 学习完成 | TODO 待归档                             |
+| 第五章: 循环与关系表达式     | 学习完成 | [chapter05](./c++primerplus/chapter05/) |
 | 第六章: 分支语句与逻辑运算符 | 学习完成 | TODO 待归档                             |
 | 第七章: 函数——C++的编程模块  | 学习完成 | TODO 待归档                             |
 | 第八章: 函数探幽             | 学习完成 | TODO 待归档                             |
