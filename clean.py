@@ -2,6 +2,7 @@
 
 import os
 import sys
+import shutil
 
 
 """
@@ -12,16 +13,32 @@ import sys
 """
 
 # tmpfileSuffixs 临时文件后缀类型
-tmpfileSuffixs = [".exe", ".obj", ".pdb", ".ilk", "a.out"]
-def isTmpFile(filename):
-    for suffix in tmpfileSuffixs:
+tempfileSuffixs = [".exe", ".obj", ".pdb", ".ilk", "a.out"]
+
+
+def isTempFile(filename):
+    for suffix in tempfileSuffixs:
         if filename.endswith(suffix):
+            return True
+    return False
+
+
+# tmpDirectorySuffix 清理构建生成的临时目录
+# MacOS上clang编译器生成
+tempDirectorySuffix = [".dSYM"]
+
+
+def isTempDirectory(dir):
+    for sufflix in tempDirectorySuffix:
+        if sufflix in dir:
             return True
     return False
 
 
 # excludeDirs 不需要清理的目录
 excludeDirs = [".git", ".vscode"]
+
+
 def isExcludeDir(dir):
     for ex in excludeDirs:
         if ex in dir:
@@ -33,13 +50,17 @@ def cleanSpecifiedDir(dir):
     "clean temporary file of specified directory"
     for path, _, files in os.walk(dir):
         for f in files:
-            if isTmpFile(f):
+            if isTempFile(f):
                 os.remove(os.path.join(path, f))
 
 
 def cleanDirs(dirs):
     for d in dirs:
-        cleanSpecifiedDir(d)
+        if isTempDirectory(d):
+            # 当先父目录被删除后，子目录再删除会报错，所以忽略错误
+            shutil.rmtree(d, ignore_errors=True)
+        else:
+            cleanSpecifiedDir(d)
 
 
 def cleanAll():
@@ -56,7 +77,7 @@ def cleanAll():
 
 
 def main():
-    if(len(sys.argv) <= 1):
+    if len(sys.argv) <= 1:
         cleanAll()
     else:
         cleanDirs(sys.argv[1:])
